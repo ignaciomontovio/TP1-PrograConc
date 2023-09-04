@@ -13,7 +13,7 @@
 
 using namespace std;
 
-//int generateChildNodes(map<char, vector<char>> &nodes_map, char current_letter, unsigned int sleep_time);
+int generateChildNodes(map<char, vector<char>> &nodes_map, char current_letter, unsigned int sleep_time);
 
 int main(int argc, char *argv[])
 {
