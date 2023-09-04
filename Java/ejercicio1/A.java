@@ -11,7 +11,7 @@ public class A {
             ProcessBuilder builderB = new ProcessBuilder("java", "ejercicio1/B.java", procesoAPID);
             ProcessBuilder builderC = new ProcessBuilder("java", "ejercicio1/C.java", procesoAPID);
 
-            builderB.inheritIO().start().waitFor();
+            builderB.inheritIO().start();
             builderC.inheritIO().start().waitFor();
         } catch (Exception e) {
             e.printStackTrace();
