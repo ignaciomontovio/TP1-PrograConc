@@ -16,6 +16,7 @@ public class B
 
       builderD.inheritIO().start();
       builderE.inheritIO().start().waitFor();
+      builderD.waitFor();
     } catch (Exception e)
     {
       e.printStackTrace();
