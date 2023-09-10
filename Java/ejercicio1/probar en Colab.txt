@@ -1,0 +1,262 @@
++CODIGO
+import os
+
+# Crear el directorio src
+os.makedirs("src", exist_ok=True)
+
+# Crear el directorio bin
+os.makedirs("bin", exist_ok=True)
+
+
+
+
++CODIGO
+# Escribir el contenido de A.java en una celda de código
+a_java_content = """
+package ejercicio1;
+
+public class A {
+    public static void main(String[] args) {
+        String procesoAPID = Long.toString(ProcessHandle.current().pid());
+
+        System.out.println("A (PID: " + procesoAPID + ", PID Padre: " + ProcessHandle.current().parent().get().pid() + ")");
+
+        try {
+            ProcessBuilder builderB = new ProcessBuilder("java", "src/B.java", procesoAPID);
+            ProcessBuilder builderC = new ProcessBuilder("java", "src/C.java", procesoAPID);
+
+            builderB.inheritIO().start().waitFor();
+            builderC.inheritIO().start().waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+"""
+
+# Escribir el contenido de A.java en un archivo
+with open("src/A.java", "w") as java_file:
+    java_file.write(a_java_content)
+
+
+
++CODIGO
+# Escribir el contenido de A.java en una celda de código
+b_java_content = """
+package ejercicio1;
+
+public class B {
+    public static void main(String[] args) {
+        String letra = "B";
+        //String padrePID = args[0];
+        //System.out.println("VER" + args[0]);
+
+        System.out.println(letra + " (PID: " + ProcessHandle.current().pid() + ", PID Padre: " + ProcessHandle.current().parent().get().pid() + ")");
+        try {
+            ProcessBuilder builderD = new ProcessBuilder("java", "src/D.java", Long.toString(ProcessHandle.current().parent().get().pid()));
+            ProcessBuilder builderE = new ProcessBuilder("java", "src/E.java", Long.toString(ProcessHandle.current().parent().get().pid()));
+
+            builderD.inheritIO().start().waitFor();
+            builderE.inheritIO().start().waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+"""
+
+
+# Escribir el contenido de A.java en un archivo
+with open("src/B.java", "w") as java_file:
+    java_file.write(b_java_content)
+
+
+
++CODIGO
+# Escribir el contenido de A.java en una celda de código
+c_java_content = """
+package ejercicio1;
+
+public class C {
+    public static void main(String[] args) {
+        String letra = "C";
+       // String padrePID = args[0];
+
+        System.out.println(letra + " (PID: " + ProcessHandle.current().pid() + ", PID Padre: " + ProcessHandle.current().parent().get().pid() + ")");
+        try {
+            ProcessBuilder builderF = new ProcessBuilder("java", "src/F.java", Long.toString(ProcessHandle.current().parent().get().pid()));
+            builderF.inheritIO().start().waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+"""
+
+
+# Escribir el contenido de A.java en un archivo
+with open("src/C.java", "w") as java_file:
+    java_file.write(c_java_content)
+
+
+
++CODIGO
+# Escribir el contenido de A.java en una celda de código
+d_java_content = """
+package ejercicio1;
+
+public class D {
+    public static void main(String[] args) {
+        String letra = "D";
+        //String padrePID = args[0];
+
+        System.out.println(letra + " (PID: " + ProcessHandle.current().pid() + ", PID Padre: " + ProcessHandle.current().parent().get().pid() + ")");
+
+    }
+}
+"""
+
+
+# Escribir el contenido de A.java en un archivo
+with open("src/D.java", "w") as java_file:
+    java_file.write(d_java_content)
+
+
+
+
++CODIGO
+# Escribir el contenido de A.java en una celda de código
+e_java_content = """
+package ejercicio1;
+
+public class E {
+    public static void main(String[] args) {
+        String letra = "E";
+        //String padrePID = args[0];
+
+        System.out.println(letra + " (PID: " + ProcessHandle.current().pid() + ", PID Padre: " + ProcessHandle.current().parent().get().pid() + ")");
+        try {
+            ProcessBuilder builderG = new ProcessBuilder("java", "src/G.java", Long.toString(ProcessHandle.current().parent().get().pid()));
+            ProcessBuilder builderH = new ProcessBuilder("java", "src/H.java", Long.toString(ProcessHandle.current().parent().get().pid()));
+
+            builderG.inheritIO().start().waitFor();
+            builderH.inheritIO().start().waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+"""
+
+
+# Escribir el contenido de A.java en un archivo
+with open("src/E.java", "w") as java_file:
+    java_file.write(e_java_content)
+
+
+
++CODIGO
+# Escribir el contenido de A.java en una celda de código
+f_java_content = """
+package ejercicio1;
+
+public class F {
+    public static void main(String[] args) {
+        String letra = "F";
+       // String padrePID = args[0];
+
+        System.out.println(letra + " (PID: " + ProcessHandle.current().pid() + ", PID Padre: " + ProcessHandle.current().parent().get().pid() + ")");
+
+
+    }
+}
+
+"""
+
+
+# Escribir el contenido de A.java en un archivo
+with open("src/F.java", "w") as java_file:
+    java_file.write(f_java_content)
+
+
+
++CODIGO
+# Escribir el contenido de A.java en una celda de código
+g_java_content = """
+package ejercicio1;
+
+public class G {
+
+	    public static void main(String[] args) {
+	        String letra = "G";
+	       // String padrePID = args[0];
+
+	        System.out.println(letra + " (PID: " + ProcessHandle.current().pid() + ", PID Padre: " + ProcessHandle.current().parent().get().pid() + ")");
+
+	    }
+	}
+
+"""
+
+
+# Escribir el contenido de A.java en un archivo
+with open("src/G.java", "w") as java_file:
+    java_file.write(g_java_content)
+
+
++CODIGO
+# Escribir el contenido de A.java en una celda de código
+h_java_content = """
+package ejercicio1;
+
+public class H {
+    public static void main(String[] args) {
+        String letra = "H";
+       // String padrePID = args[0];
+
+        System.out.println(letra + " (PID: " + ProcessHandle.current().pid() + ", PID Padre: " + ProcessHandle.current().parent().get().pid() + ")");
+        
+    }
+}
+
+"""
+
+
+# Escribir el contenido de A.java en un archivo
+with open("src/H.java", "w") as java_file:
+    java_file.write(h_java_content)
+
+
+
++CODIGO
+# Escribir el contenido de run.sh en una celda de código
+run_sh_content = """
+#!/bin/bash
+
+# Compilar A.java y crear el directorio bin si no existe
+javac -d bin src/A.java
+mkdir -p bin/ejercicio1
+
+# Compilar B.java y C.java y mover los archivos .class al directorio bin/ejercicio1
+javac -d bin src/B.java
+javac -d bin src/C.java
+javac -d bin src/D.java
+javac -d bin src/E.java
+javac -d bin src/F.java
+javac -d bin src/G.java
+javac -d bin src/H.java
+
+# Ejecutar el programa A
+java -cp bin ejercicio1.A
+
+"""
+
+# Escribir el contenido de run.sh en un archivo
+with open("run.sh", "w") as run_sh_file:
+    run_sh_file.write(run_sh_content)
+
+
+
++CODIGO
+!bash run.sh
