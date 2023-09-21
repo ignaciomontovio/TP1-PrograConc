@@ -7,7 +7,13 @@ def processA():
     processB()
     processC()
     print(
-        "Proceso A - ID: ", os.getpid(), "PID: ", os.getppid(), "\n", end="", flush=True
+        "Proceso A - ID: ",
+        os.getpid(),
+        "PID: ",
+        os.getppid(),
+        "\n",
+        end="",
+        flush=True,
     )
     time.sleep(15)
     sys.exit(os.EX_OK)
