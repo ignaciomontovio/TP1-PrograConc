@@ -13,7 +13,7 @@
 
 using namespace std;
 
-int generateChildNodes(map<char, vector<char>> &nodes_map, char current_letter, unsigned int sleep_time);
+int GenerateChildNodes(map<char, vector<char>> &nodes_map, char current_letter, unsigned int sleep_time);
 
 int main(int argc, char *argv[])
 {
@@ -40,10 +40,10 @@ int main(int argc, char *argv[])
     }
   }
 
-  return generateChildNodes(nodes_map, INITIAL_NODE, sleep_time);
+  return GenerateChildNodes(nodes_map, INITIAL_NODE, sleep_time);
 }
 
-int generateChildNodes(map<char, vector<char>> &nodes_map,
+int GenerateChildNodes(map<char, vector<char>> &nodes_map,
   char current_letter,
   unsigned int sleep_time)
 {
@@ -69,7 +69,7 @@ int generateChildNodes(map<char, vector<char>> &nodes_map,
       break;
     
     case CHILD:
-      return generateChildNodes(nodes_map, next_child, sleep_time);
+      return GenerateChildNodes(nodes_map, next_child, sleep_time);
       break;
 
     default: // Parent case
