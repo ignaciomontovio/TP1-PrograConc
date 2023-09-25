@@ -2,157 +2,87 @@ import time
 import os
 import sys
 
-
-def processA():
-    processB()
-    processC()
-    print(
-        "Proceso A - ID: ",
-        os.getpid(),
-        "PID: ",
-        os.getppid(),
-        "\n",
-        end="",
-        flush=True,
-    )
-    time.sleep(15)
-    sys.exit(os.EX_OK)
-
-
-def processB():
-    pidB = os.fork()
-    if pidB == -1:
+def process_b():
+    pid_b = os.fork()
+    if pid_b == -1:
         sys.exit("Error al crear el hijo")
-    if pidB == 0:
-        processD()
-        processE()
-        print(
-            "Proceso B - ID: ",
-            os.getpid(),
-            "PID: ",
-            os.getppid(),
-            "\n",
-            end="",
-            flush=True,
-        )
+    if pid_b > 0:
+        process_c()
+    else:
+        process_d()
+
+def process_c():
+    pid_c = os.fork()
+    if pid_c == -1:
+        sys.exit("Error al crear el hijo")
+    if pid_c > 0:
+        print("Proceso A - ID:", os.getpid(), "PID:", os.getppid(), "\n", end="", flush=True)
+        time.sleep(15)
+        sys.exit(os.EX_OK)
+    else:
+        process_f()
+
+def process_d():
+    pid_d = os.fork()
+    if pid_d == -1:
+        sys.exit("Error al crear el hijo")
+    if pid_d > 0:
+        process_e()
+    else:
+        print("Proceso D - ID:", os.getpid(), "PID:", os.getppid(), "\n", end="", flush=True)
         time.sleep(15)
         os._exit(os.EX_OK)
 
-
-def processC():
-    pidC = os.fork()
-    if pidC == -1:
+def process_e():
+    pid_e = os.fork()
+    if pid_e == -1:
         sys.exit("Error al crear el hijo")
-    if pidC == 0:
-        processF()
-        print(
-            "Proceso C - ID: ",
-            os.getpid(),
-            "PID: ",
-            os.getppid(),
-            "\n",
-            end="",
-            flush=True,
-        )
+    if pid_e > 0:
+        print("Proceso B - ID:", os.getpid(), "PID:", os.getppid(), "\n", end="", flush=True)
+        time.sleep(15)
+        os._exit(os.EX_OK)
+    else:
+        process_g()
+
+def process_f():
+    pid_f = os.fork()
+    if pid_f == -1:
+        sys.exit("Error al crear el hijo")
+    if pid_f > 0:
+        print("Proceso C - ID:", os.getpid(), "PID:", os.getppid(), "\n", end="", flush=True)
+        time.sleep(15)
+        os._exit(os.EX_OK)
+    else:
+        print("Proceso F - ID:", os.getpid(), "PID:", os.getppid(), "\n", end="", flush=True)
         time.sleep(15)
         os._exit(os.EX_OK)
 
-
-def processD():
-    pidD = os.fork()
-    if pidD == -1:
+def process_g():
+    pid_g = os.fork()
+    if pid_g == -1:
         sys.exit("Error al crear el hijo")
-    if pidD == 0:
-        print(
-            "Proceso D - ID: ",
-            os.getpid(),
-            "PID: ",
-            os.getppid(),
-            "\n",
-            end="",
-            flush=True,
-        )
+    if pid_g > 0:
+        process_h()
+    else:
+        print("Proceso G - ID:", os.getpid(), "PID:", os.getppid(), "\n", end="", flush=True)
         time.sleep(15)
         os._exit(os.EX_OK)
 
-
-def processE():
-    pidE = os.fork()
-    if pidE == -1:
+def process_h():
+    pid_h = os.fork()
+    if pid_h == -1:
         sys.exit("Error al crear el hijo")
-    if pidE == 0:
-        processG()
-        processH()
-        print(
-            "Proceso E - ID: ",
-            os.getpid(),
-            "PID: ",
-            os.getppid(),
-            "\n",
-            end="",
-            flush=True,
-        )
+    if pid_h > 0:
+        print("Proceso E - ID:", os.getpid(), "PID:", os.getppid(), "\n", end="", flush=True)
         time.sleep(15)
         os._exit(os.EX_OK)
-
-
-def processF():
-    pidF = os.fork()
-    if pidF == -1:
-        sys.exit("Error al crear el hijo")
-    if pidF == 0:
-        print(
-            "Proceso F - ID: ",
-            os.getpid(),
-            "PID: ",
-            os.getppid(),
-            "\n",
-            end="",
-            flush=True,
-        )
+    else:
+        print("Proceso H - ID:", os.getpid(), "PID:", os.getppid(), "\n", end="", flush=True)
         time.sleep(15)
         os._exit(os.EX_OK)
-
-
-def processG():
-    pidG = os.fork()
-    if pidG == -1:
-        sys.exit("Error al crear el hijo")
-    if pidG == 0:
-        print(
-            "Proceso G - ID: ",
-            os.getpid(),
-            "PID: ",
-            os.getppid(),
-            "\n",
-            end="",
-            flush=True,
-        )
-        time.sleep(15)
-        os._exit(os.EX_OK)
-
-
-def processH():
-    pidH = os.fork()
-    if pidH == -1:
-        sys.exit("Error al crear el hijo")
-    if pidH == 0:
-        print(
-            "Proceso H - ID: ",
-            os.getpid(),
-            "PID: ",
-            os.getppid(),
-            "\n",
-            end="",
-            flush=True,
-        )
-        time.sleep(15)
-        os._exit(os.EX_OK)
-
 
 def main():
-    processA()
+    process_b()
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
